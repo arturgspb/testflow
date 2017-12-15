@@ -1,0 +1,23 @@
+version: '2'
+services:
+  testapp:
+    build: .
+    volumes:
+      - ~/.gradle:/root/.gradle
+      - ./build/dockerout:/tmp/app/build/reports
+    networks:
+      - my-app-bridge
+    depends_on:
+      - selenium-chrome
+  selenium-chrome:
+    image: selenium/standalone-chrome
+    networks:
+      - my-app-bridge
+    environment:
+        - SCREEN_WIDTH=1024
+        - SCREEN_HEIGHT=768
+networks:
+  my-app-bridge:
+    driver: bridge
+
+
