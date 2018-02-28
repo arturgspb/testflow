@@ -110,6 +110,12 @@ public class Base {
         logged = false;
     }
 
+    @AfterClass
+    public static void close() {
+        driver.close();
+    }
+
+
     public WebDriver driver() {
         return driver;
     }
