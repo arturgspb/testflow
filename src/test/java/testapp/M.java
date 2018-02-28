@@ -30,4 +30,9 @@ public class M extends Base {
         File file = $(".mw-mmv-download-go-button").should(visible).download();
         System.out.println("file = " + file.getAbsolutePath());
     }
+
+    @Test
+    public void mazda() {
+        open("https://garpun.com");
+    }
 }
