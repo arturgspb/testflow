@@ -1,28 +1,16 @@
 package testapp;
 
-import com.codeborne.selenide.SelenideElement;
 import org.junit.Test;
-import org.openqa.selenium.Keys;
 import pageobject.WikiPage;
 import ru.realweb.meta.Base;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class M extends Base {
-
-    @Test
-    public void youtube() {
-        open("/");
-        SelenideElement input = $("#lst-ib");
-        input.sendKeys("youtube");
-        input.sendKeys(Keys.ENTER);
-        $("body").shouldHave(text("YouTube — видеохостинговая компания"));
-    }
+public class WikiMediaDownloadSpec extends Base {
 
     @Test
     public void wikiInlineSelectors() throws Exception {
