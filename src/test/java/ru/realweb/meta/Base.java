@@ -41,7 +41,30 @@ public class Base {
     public static Proxy seleniumProxy;
 
     static {
-        // start the proxy
+        DesiredCapabilities capabilities = null;
+//        capabilities = doProxy();
+
+
+        Configuration.browser = "chrome";
+//        Configuration.browser = "firefox";
+
+        Configuration.baseUrl = "https://www.google.ru";
+        Configuration.timeout = 5000;
+        Configuration.startMaximized = true;
+        Configuration.savePageSource = false;
+        Configuration.screenshots = true;
+//        Configuration.remote = "http://selenium-chrome:4444/wd/hub";
+
+        if (capabilities != null) {
+            driver = new ChromeDriver(capabilities);
+            WebDriverRunner.setWebDriver(driver);
+            WebDriverRunner.webdriverContainer.setProxy(seleniumProxy);
+        } else {
+            driver = WebDriverRunner.getWebDriver();
+        }
+    }
+
+    private static DesiredCapabilities doProxy() {
         proxy = new BrowserMobProxyServer();
         proxy.start(0);
 
@@ -84,19 +107,7 @@ public class Base {
         ChromeDriverManager.getInstance().setup();
 
         Configuration.headless = true;
-        Configuration.browser = "chrome";
-//        Configuration.browser = "firefox";
-
-        Configuration.baseUrl = "https://www.google.ru";
-        Configuration.timeout = 5000;
-        Configuration.startMaximized = true;
-        Configuration.savePageSource = false;
-        Configuration.screenshots = true;
-//        Configuration.remote = "http://selenium-chrome:4444/wd/hub";
-
-        driver = new ChromeDriver(capabilities);
-        WebDriverRunner.setWebDriver(driver);
-        WebDriverRunner.webdriverContainer.setProxy(seleniumProxy);
+        return capabilities;
     }
 
     @Rule
